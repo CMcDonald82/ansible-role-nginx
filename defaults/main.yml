@@ -1,0 +1,88 @@
+---
+
+# Nginx defaults
+
+#------------------------------------------------------------------------------
+# INSTALLATION
+#------------------------------------------------------------------------------
+# nginx_ppa_version is only needed if installing via ppa
+nginx_ppa_version: development 
+nginx_conf_file_path: /etc/nginx/nginx.conf
+nginx_confd_dir_path: /etc/nginx/conf.d
+nginx_sites_available_dir_path: /etc/nginx/sites-available
+nginx_sites_enabled_dir_path: /etc/nginx/sites-enabled
+
+# dhparams
+nginx_dhparam_path: /etc/ssl/dhparams.pem
+nginx_dhparam_encryption_size: 2048
+
+
+#------------------------------------------------------------------------------
+# MAIN
+#-----------------------------------------------------------------------------
+# The user account used by the worker processes. This should be "www-data", the 
+# user created by the nginx install process specifically for use with nginx. 
+# That way, this user will only have access to the nginx processes so if that user 
+# account is compromised somehow, it is not an account that is used by other 
+# services (such as postgres or the entire Ubuntu system, for example)
+nginx_user: "www-data"
+
+# Set to number of CPU cores, auto will try to autodetect.
+nginx_worker_processes: auto #1
+
+# File that stores the process ID. Rarely needs changing.
+nginx_pidfile: "/run/nginx.pid" #"/var/run/nginx.pid"
+
+
+#------------------------------------------------------------------------------
+# EVENTS
+#------------------------------------------------------------------------------
+# Set the maximum number of connection each worker process can open. Anything 
+# higher than this will require Unix optimizations.
+nginx_worker_connections: 768 #1024
+
+# Accept all new connections as they're opened.
+nginx_multi_accept: on
+
+
+#------------------------------------------------------------------------------
+# HTTP
+#------------------------------------------------------------------------------
+# Speed up file transfer by using sendfile().
+nginx_sendfile: 'on'
+
+# Don't send partial frames, which increases throughput.
+nginx_tcp_nopush: 'on'
+
+# Don't wait to send data in keep-alive state.
+nginx_tcp_nodelay: 'on'
+
+# How long each connection should stay open for.
+nginx_keepalive_timeout: 65
+
+# Timeout for reading client request body.
+nginx_client_body_timeout: 30
+
+# Timeout for reading client request header.
+nginx_client_header_timeout: 30
+
+# Timeout for transmitting reponse to client.
+nginx_send_timeout: 30
+
+# Set the maximum allowed size of client request body. This should be set
+# to the value of files sizes you wish to upload 
+nginx_client_max_body_size: "64m"
+
+nginx_client_body_buffer_size: "128k"
+
+nginx_types_hash_max_size: 2048
+
+# Hide Nginx version in error messages and reponse headers.
+nginx_server_tokens: 'off'
+
+nginx_mime_type_file_path: /etc/nginx/mime.types
+
+nginx_server_names_hash_bucket_size: 64
+nginx_server_name_in_redirect: 'off'
+
+nginx_log_path: "/var/log/nginx"
