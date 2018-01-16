@@ -1,0 +1,14 @@
+---
+
+# To further increase security, you should generate a strong Diffie-Hellman group. 
+# This task generates a 2048-bit group
+
+- name: Check if dhparams.pem file exists
+  stat:
+    path: /etc/ssl/dhparams.pem
+  register: dhparams_file
+
+- name: Create the dhparams.pem file if it does not exists
+  become: yes
+  command: sudo openssl dhparam -out /etc/ssl/dhparams.pem 2048
+  when: not dhparams_file.stat.exists
