@@ -8,8 +8,8 @@
 # nginx_ppa_version is only needed if installing via ppa
 nginx_ppa_version: stable 
 nginx_conf_file_path: /etc/nginx/nginx.conf
-nginx_confd_dir_path: /etc/nginx/conf.d # Do we need this or should we just hardcode it to be safer since if a user changes this path, they'd also need to modify the path in the include statement in nginx.conf
-nginx_sites_available_dir_path: /etc/nginx/sites-available
+nginx_confd_directory: /etc/nginx/conf.d # Do we need this or should we just hardcode it to be safer since if a user changes this path, they'd also need to modify the path in the include statement in nginx.conf
+nginx_sites_available_directory: /etc/nginx/sites-available
 nginx_sites_enabled_dir_path: /etc/nginx/sites-enabled
 
 
@@ -78,6 +78,9 @@ nginx_confd_files: # Use this if specifying specific files to copy over to the r
   - ./files/conf.d/http_gzip.conf
   - ./files/conf.d/http_proxy.conf
   - ./files/conf.d/http_ssl.conf
+
+nginx_sites_available_files: []
+
 
 # NOW LOCATED IN /files/conf.d/http_core.conf
 # Speed up file transfer by using sendfile().

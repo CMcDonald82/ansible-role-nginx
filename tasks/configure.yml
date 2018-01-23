@@ -1,40 +1,66 @@
 ---
 
-- name: Ensure conf.d, sites-available, and sites-enabled directories exist
+- name: Nginx | Ensure conf.d, sites-available, and sites-enabled directories exist
   file:
     path: "{{ item }}"
     state: directory
   with_items:
-    - "{{ nginx_confd_dir_path }}"
+    - "{{ nginx_confd_directory }}"
     - "{{ nginx_sites_available_dir_path }}"
     - "{{ nginx_sites_enabled_dir_path }}"
   notify: reload nginx
 
-- name: Copy conf.d directory
-  synchronize:
-    src: ./templates/conf.d/
-    dest: "{{ nginx_confd_dir_path }}"
-  notify: 
-    - validate nginx configuration
-    - restart nginx
-
-- name: Copy sites-available directory
-  synchronize:
-    src: ./templates/sites-available/
-    dest: "{{ nginx_sites_available_dir_path }}"
+# This is the new way which copies files over individually which should allow more flexibility for users to specify 
+# which particular files they want from a variety of locations on their local machine
+- name: Nginx | Copy .conf files into conf.d directory
+  template:
+    src: "{{ item }}"
+    dest: "{{ nginx_confd_directory }}/{{ item }}"
+    owner: "{{ nginx_user }}"
+    mode: 0644
+  with_items: "{{ nginx_confd_files }}"
   notify:
     - validate nginx configuration
     - restart nginx
 
+- name: Nginx | Copy serverblock files into sites-available directory
+  template:
+    src: "{{ item }}"
+    dest: "{{ nginx_sites_available_directory }}"
+    owner: "{{ nginx_user }}"
+    mode: 0644
+  with_items: "{{ nginx_sites_available_files }}"
+  notify:
+    - validate nginx configuration
+    - restart nginx
+
+# This is the old way, which synchronizes the entire directory.
+# - name: Copy conf.d directory
+#   synchronize:
+#     src: ./templates/conf.d/
+#     dest: "{{ nginx_confd_dir_path }}"
+#   notify: 
+#     - validate nginx configuration
+#     - restart nginx
+
+# - name: Copy sites-available directory
+#   synchronize:
+#     src: ./templates/sites-available/
+#     dest: "{{ nginx_sites_available_dir_path }}"
+#   notify:
+#     - validate nginx configuration
+#     - restart nginx
+
 - name: Find all files in sites-available directory
   find:
-    path: "{{ nginx_sites_available_dir_path }}"
+    path: "{{ nginx_sites_available_directory }}"
     file_type: any
   register: sites_available_result
 
+# NOTE: Symlink all files except default.conf
 - name: Symlink files in sites-available directory to sites-enabled directory
   file:
-    src: "{{ nginx_sites_available_dir_path }}/{{ item.path | basename }}"
+    src: "{{ nginx_sites_available_directory }}/{{ item.path | basename }}"
     dest: "{{ nginx_sites_enabled_dir_path }}/{{ item.path | basename }}"
     state: link
     force: yes
