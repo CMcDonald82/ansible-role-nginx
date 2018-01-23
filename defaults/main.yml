@@ -35,6 +35,10 @@ nginx_worker_processes: auto #1
 # File that stores the process ID. Rarely needs changing.
 nginx_pidfile: "/run/nginx.pid" #"/var/run/nginx.pid"
 
+# This is the path to where the log files will be stored. 
+# NOTE: See if this variable works when embedded in files within the 'files' directory
+nginx_log_path: "/var/log/nginx"
+
 
 #------------------------------------------------------------------------------
 # EVENTS
@@ -54,7 +58,26 @@ nginx_multi_accept: on
 # See the modules reference at https://nginx.org/en/docs/ for descriptions of all the ngx_http_*_module directives that are available for configuration.
 # Recommended to make a seperate .conf file for each module you want to configre (ex. http_core.conf for configuring the directives in ngx_http_core_module)
 # NOTE: This may be able to replace all the vars below since we can just have users create files to define these variables within the nginx_confd_dir_local directory
-nginx_confd_dir_local: ./files/conf.d
+# Also, consider having users specify a list of individual *.conf files here. This would allow users to mix & match use of the 
+# default *.conf files included and *.conf files they add on their own. For example, a user could specify the following:
+# - nginx_confd_files:
+#   - ./files/conf.d/http_core.conf
+#   - ./path/to/my/files/my_http_module_file.conf
+# The default values would be:
+# - nginx_confd_files:
+#   - ./files/conf.d/http_core.conf
+#   - ./files/conf.d/http_gzip.conf
+#   - ./files/conf.d/http_log.conf
+#   - ./files/conf.d/http_proxy.conf
+#   - ./files/conf.d/http_ssl.conf
+
+# nginx_confd_dir_local: ./files/conf.d # use this if we're synchronizing the local dir with the remote
+nginx_confd_files: # Use this if specifying specific files to copy over to the remote server
+  - ./files/conf.d/http_core.conf
+  - ./files/conf.d/http_gzip.conf
+  - ./files/conf.d/http_gzip.conf
+  - ./files/conf.d/http_proxy.conf
+  - ./files/conf.d/http_ssl.conf
 
 # NOW LOCATED IN /files/conf.d/http_core.conf
 # Speed up file transfer by using sendfile().
@@ -99,11 +122,11 @@ nginx_confd_dir_local: ./files/conf.d
 # Hide Nginx version in error messages and reponse headers.
 # nginx_server_tokens: 'off'
 
-nginx_mime_type_file_path: /etc/nginx/mime.types
+# NOT NEEDED ANYMORE - we'll just hardcode this in unless people have a use for specifying a different path
+# nginx_mime_type_file_path: /etc/nginx/mime.types
 
 # NOW LOCATED IN /files/conf.d/http_core.conf
 # nginx_server_names_hash_bucket_size: 64
 # NOW LOCATED IN /files/conf.d/http_core.conf
 # nginx_server_name_in_redirect: 'off'
 
-nginx_log_path: "/var/log/nginx"
