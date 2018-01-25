@@ -11,7 +11,7 @@
   notify: reload nginx
 
 - debug:
-    msg: "basename: {{ item.basename }}"
+    msg: "basename: {{ item | basename }}"
     with_items: "{{ nginx_confd_files }}"
 
 # This is the new way which copies files over individually which should allow more flexibility for users to specify 
