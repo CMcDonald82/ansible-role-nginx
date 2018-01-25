@@ -68,7 +68,7 @@
     state: link
     force: yes
   with_items: "{{ sites_available_result.files }}"
-  # when: item
+  when: item.path | basename != 'default.conf'
 
 - name: Nginx | Copy nginx.conf in place
   template:
