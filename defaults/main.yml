@@ -8,8 +8,10 @@
 # nginx_ppa_version is only needed if installing via ppa
 nginx_ppa_version: stable 
 nginx_conf_file_path: /etc/nginx/nginx.conf
-nginx_confd_directory: /etc/nginx/conf.d # Do we need this or should we just hardcode it to be safer since if a user changes this path, they'd also need to modify the path in the include statement in nginx.conf
-nginx_sites_available_directory: /etc/nginx/sites-available
+nginx_confd_directory_local: ./files/conf.d
+nginx_confd_directory_remote: /etc/nginx/conf.d # Do we need this or should we just hardcode it to be safer since if a user changes this path, they'd also need to modify the path in the include statement in nginx.conf
+nginx_sites_available_directory_local: ./files/sites-available
+nginx_sites_available_directory_remote: /etc/nginx/sites-available
 nginx_sites_enabled_directory: /etc/nginx/sites-enabled
 
 
@@ -73,14 +75,14 @@ nginx_multi_accept: on
 
 # nginx_confd_dir_local: ./files/conf.d # use this if we're synchronizing the local dir with the remote
 nginx_confd_files: # Use this if specifying specific files to copy over to the remote server
-  - ./files/conf.d/http_core.conf
-  - ./files/conf.d/http_gzip.conf
-  - ./files/conf.d/http_gzip.conf
-  - ./files/conf.d/http_proxy.conf
-  - ./files/conf.d/http_ssl.conf
+  - http_core.conf
+  - http_gzip.conf
+  - http_gzip.conf
+  - http_proxy.conf
+  - http_ssl.conf
 
 nginx_sites_available_files: 
-  - ./files/sites-available/default.conf
+  - default.conf
 
 
 # NOW LOCATED IN /files/conf.d/http_core.conf
