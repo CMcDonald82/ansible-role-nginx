@@ -77,12 +77,12 @@ nginx_multi_accept: on
 nginx_confd_files: # Use this if specifying specific files to copy over to the remote server
   - ./files/conf.d/http_core.conf
   - ./files/conf.d/http_gzip.conf
-  - http_gzip.conf
-  - http_proxy.conf
-  - http_ssl.conf
+  - ./files/conf.d/http_log.conf
+  - ./files/conf.d/http_proxy.conf
+  - ./files/conf.d/http_ssl.conf
 
 nginx_sites_available_files: 
-  - default.conf
+  - ./files/sites-available/default.conf
 
 
 # NOW LOCATED IN /files/conf.d/http_core.conf

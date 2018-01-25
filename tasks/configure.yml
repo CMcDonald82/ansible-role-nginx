@@ -12,14 +12,14 @@
 
 - debug:
     msg: "basename: {{ item | basename }}"
-  with_items: "{{ nginx_confd_files }}"
+    with_items: "{{ nginx_confd_files }}"
 
 # This is the new way which copies files over individually which should allow more flexibility for users to specify 
 # which particular files they want from a variety of locations on their local machine
 - name: Nginx | Copy .conf files into conf.d directory
   template:
-    src: "{{ nginx_confd_directory_local }}/{{ item }}"
-    dest: "{{ nginx_confd_directory_remote }}/{{ item }}"
+    src: "{{ item }}"
+    dest: "{{ nginx_confd_directory_remote }}/{{ item | basename }}"
     owner: "{{ nginx_user }}"
     mode: 0644
   with_items: "{{ nginx_confd_files }}"
@@ -29,8 +29,8 @@
 
 - name: Nginx | Copy serverblock files into sites-available directory
   template:
-    src: "{{ nginx_sites_available_directory_local }}/{{ item }}"
-    dest: "{{ nginx_sites_available_directory_remote }}/{{ item }}"
+    src: "{{ item }}"
+    dest: "{{ nginx_sites_available_directory_remote }}/{{ item | basename }}"
     owner: "{{ nginx_user }}"
     mode: 0644
   with_items: "{{ nginx_sites_available_files }}"
