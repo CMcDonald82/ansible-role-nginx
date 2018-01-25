@@ -22,3 +22,10 @@ script:
 
   # Run tests
   - ${PWD}/tests/test.sh
+
+  # Setup test site.
+  - 'docker exec ${container_id} mkdir -p /var/www/test'
+  - 'docker exec ${container_id} bash -c "echo Success >| /var/www/test/index.html"'
+
+  # Make sure virtualhost exists.
+  - 'docker exec --tty ${container_id} env TERM=xterm curl http://test.dev/ | grep "Success"'
