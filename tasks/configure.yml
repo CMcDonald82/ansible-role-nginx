@@ -17,7 +17,7 @@
 # This is the new way which copies files over individually which should allow more flexibility for users to specify 
 # which particular files they want from a variety of locations on their local machine
 - name: Nginx | Copy .conf files into conf.d directory
-  copy:
+  template:
     src: "{{ item }}"
     dest: "{{ nginx_confd_directory_remote }}/{{ item | basename }}"
     owner: "{{ nginx_user }}"
@@ -28,7 +28,7 @@
     - restart nginx
 
 - name: Nginx | Copy serverblock files into sites-available directory
-  copy:
+  template:
     src: "{{ item }}"
     dest: "{{ nginx_sites_available_directory_remote }}/{{ item | basename }}"
     owner: "{{ nginx_user }}"
