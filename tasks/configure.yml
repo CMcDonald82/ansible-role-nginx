@@ -10,6 +10,10 @@
     - "{{ nginx_sites_enabled_directory }}"
   notify: reload nginx
 
+- debug:
+    msg: "basename: {{ item.basename }}"
+    with_items: "{{ nginx_confd_files }}"
+
 # This is the new way which copies files over individually which should allow more flexibility for users to specify 
 # which particular files they want from a variety of locations on their local machine
 - name: Nginx | Copy .conf files into conf.d directory
@@ -57,8 +61,10 @@
     file_type: any
   register: sites_available_result
 
-- debug:
-    msg: "sites_available_result {{ sites_available_result.files }}"
+# - debug:
+#     msg: "sites_available_result {{ sites_available_result.files }}"
+
+
 
 # NOTE: Symlink all files except default.conf
 - name: Nginx | Symlink files in sites-available directory to sites-enabled directory
