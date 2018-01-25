@@ -38,8 +38,8 @@ nginx_worker_processes: auto #1
 nginx_pidfile: "/run/nginx.pid" #"/var/run/nginx.pid"
 
 # This is the path to where the log files will be stored. 
-# NOTE: See if this variable works when embedded in files within the 'files' directory
-nginx_log_path: "/var/log/nginx"
+# NOTE: See if this variable works when embedded in files within the 'files' directory UPDATE: It does not work
+# nginx_log_path: "/var/log/nginx"
 
 
 #------------------------------------------------------------------------------

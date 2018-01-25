@@ -3,6 +3,12 @@
 - hosts: localhost 
   remote_user: root
   become: yes
+  vars:
+    nginx_confd_files: 
+      - ./files/conf.d/http_core.conf
+      - ./files/conf.d/http_gzip.conf
+      - ./files/conf.d/http_log.conf
+      - ./files/conf.d/http_proxy.conf
   
   roles:
     - role_under_test
