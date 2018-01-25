@@ -6,8 +6,8 @@
     state: directory
   with_items:
     - "{{ nginx_confd_directory }}"
-    - "{{ nginx_sites_available_dir_path }}"
-    - "{{ nginx_sites_enabled_dir_path }}"
+    - "{{ nginx_sites_available_directory }}"
+    - "{{ nginx_sites_enabled_directory }}"
   notify: reload nginx
 
 # This is the new way which copies files over individually which should allow more flexibility for users to specify 
@@ -51,22 +51,26 @@
 #     - validate nginx configuration
 #     - restart nginx
 
-- name: Find all files in sites-available directory
+- name: Nginx | Find all files in sites-available directory
   find:
     path: "{{ nginx_sites_available_directory }}"
     file_type: any
   register: sites_available_result
 
+- debug:
+    msg: "sites_available_result {{ sites_available_result }}"
+
 # NOTE: Symlink all files except default.conf
-- name: Symlink files in sites-available directory to sites-enabled directory
+- name: Nginx | Symlink files in sites-available directory to sites-enabled directory
   file:
     src: "{{ nginx_sites_available_directory }}/{{ item.path | basename }}"
-    dest: "{{ nginx_sites_enabled_dir_path }}/{{ item.path | basename }}"
+    dest: "{{ nginx_sites_enabled_directory }}/{{ item.path | basename }}"
     state: link
     force: yes
   with_items: "{{ sites_available_result.files }}"
+  # when: item
 
-- name: Copy nginx.conf in place
+- name: Nginx | Copy nginx.conf in place
   template:
     src: nginx.conf
     dest: "{{ nginx_conf_file_path }}"
