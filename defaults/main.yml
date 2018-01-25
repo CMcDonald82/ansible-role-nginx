@@ -79,7 +79,8 @@ nginx_confd_files: # Use this if specifying specific files to copy over to the r
   - ./files/conf.d/http_proxy.conf
   - ./files/conf.d/http_ssl.conf
 
-nginx_sites_available_files: []
+nginx_sites_available_files: 
+  - ./files/sites-available/default.conf
 
 
 # NOW LOCATED IN /files/conf.d/http_core.conf
