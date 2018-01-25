@@ -58,7 +58,7 @@
   register: sites_available_result
 
 - debug:
-    msg: "sites_available_result {{ sites_available_result }}"
+    msg: "sites_available_result {{ sites_available_result.files }}"
 
 # NOTE: Symlink all files except default.conf
 - name: Nginx | Symlink files in sites-available directory to sites-enabled directory
