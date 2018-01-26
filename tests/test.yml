@@ -7,8 +7,8 @@
     nginx_confd_files: 
       # - ./templates/conf.d/http_core.conf
       - ./templates/conf.d/http_gzip.conf
-      - ./templates/conf.d/http_log.conf
-      - ./templates/conf.d/http_proxy.conf
+      # - ./templates/conf.d/http_log.conf
+      # - ./templates/conf.d/http_proxy.conf
     nginx_sites_available_files:
       - ./tests/files/sites-available/test.dev
   
