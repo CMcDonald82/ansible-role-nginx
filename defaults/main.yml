@@ -8,9 +8,9 @@
 # nginx_ppa_version is only needed if installing via ppa
 nginx_ppa_version: stable 
 nginx_conf_file_path: /etc/nginx/nginx.conf
-nginx_confd_directory_local: ./templates/conf.d
+# nginx_confd_directory_local: ./templates/conf.d # probably not needed anymore
 nginx_confd_directory_remote: /etc/nginx/conf.d # Do we need this or should we just hardcode it to be safer since if a user changes this path, they'd also need to modify the path in the include statement in nginx.conf
-nginx_sites_available_directory_local: ./templates/sites-available
+# nginx_sites_available_directory_local: ./templates/sites-available # probably not needed anymore
 nginx_sites_available_directory_remote: /etc/nginx/sites-available
 nginx_sites_enabled_directory: /etc/nginx/sites-enabled
 
