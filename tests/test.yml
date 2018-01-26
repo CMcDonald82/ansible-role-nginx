@@ -5,7 +5,7 @@
   become: yes
   vars:
     nginx_confd_files: 
-      - ./templates/conf.d/http_core.conf
+      # - ./templates/conf.d/http_core.conf
       - ./templates/conf.d/http_gzip.conf
       - ./templates/conf.d/http_log.conf
       - ./templates/conf.d/http_proxy.conf
