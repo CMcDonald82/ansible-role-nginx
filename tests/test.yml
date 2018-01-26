@@ -10,7 +10,7 @@
       # - ./templates/conf.d/http_log.conf
       # - ./templates/conf.d/http_proxy.conf
     nginx_sites_available_files:
-      - ./tests/files/sites-available/test.dev
+      - ./tests/files/sites-available/test.conf
   
   roles:
     - role_under_test
