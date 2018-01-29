@@ -7,56 +7,30 @@
 #------------------------------------------------------------------------------
 nginx_ppa_version: stable 
 nginx_conf_file_path: /etc/nginx/nginx.conf
-nginx_confd_directory: /etc/nginx/conf.d # Do we need this or should we just hardcode it to be safer since if a user changes this path, they'd also need to modify the path in the include statement in nginx.conf
+nginx_confd_directory: /etc/nginx/conf.d 
 nginx_sites_available_directory: /etc/nginx/sites-available
 nginx_sites_enabled_directory: /etc/nginx/sites-enabled
-
-# This is the path to the default serverblock file that is created automatically when Nginx is installed
-nginx_default_serverblock_path: /etc/nginx/sites-enabled/default
-
-# dhparams
-nginx_dhparam_path: /etc/ssl/dhparams.pem
-nginx_dhparam_encryption_size: 2048
 
 
 #------------------------------------------------------------------------------
 # MAIN
 #-----------------------------------------------------------------------------
-# The user account used by the worker processes. This should be "www-data", the 
-# user created by the nginx install process specifically for use with nginx. 
-# That way, this user will only have access to the nginx processes so if that user 
-# account is compromised somehow, it is not an account that is used by other 
-# services (such as postgres or the entire Ubuntu system, for example)
 nginx_user: "www-data"
-
-# Set to number of CPU cores, auto will try to autodetect.
 nginx_worker_processes: auto 
-
-# File that stores the process ID. Rarely needs changing.
 nginx_pidfile: "/run/nginx.pid" 
-
-# This is the path to where the log files will be stored. 
 nginx_log_path: "/var/log/nginx"
 
 
 #------------------------------------------------------------------------------
 # EVENTS
 #------------------------------------------------------------------------------
-# Set the maximum number of connection each worker process can open. Anything 
-# higher than this will require Unix optimizations.
-nginx_worker_connections: 768 #1024
-
-# Accept all new connections as they're opened.
+nginx_worker_connections: 768
 nginx_multi_accept: on
 
 
 #------------------------------------------------------------------------------
 # HTTP & Serverblock
 #------------------------------------------------------------------------------
-# Path to the *.conf files on local machine which will be copied into nginx_confd_dir_path on server.
-# See the modules reference at https://nginx.org/en/docs/ for descriptions of all the ngx_http_*_module directives that are available for configuration.
-# Recommended to make a seperate .conf file for each module you want to configre (ex. http_core.conf for configuring the directives in ngx_http_core_module)
-
 # Also, consider having users specify a list of individual *.conf files here. This would allow users to mix & match use of the 
 # default *.conf files included and *.conf files they add on their own. For example, a user could specify the following:
 # - nginx_confd_files:
@@ -71,7 +45,7 @@ nginx_multi_accept: on
 #   - ./files/conf.d/http_ssl.conf
 
 nginx_confd_files: 
-  - ./templates/conf.d/http_core.conf
+  - ./conf.d/http_core.conf
   - ./templates/conf.d/http_gzip.conf
   - ./templates/conf.d/http_log.conf
   - ./templates/conf.d/http_proxy.conf
