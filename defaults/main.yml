@@ -31,19 +31,6 @@ nginx_multi_accept: on
 #------------------------------------------------------------------------------
 # HTTP & Serverblock
 #------------------------------------------------------------------------------
-# Also, consider having users specify a list of individual *.conf files here. This would allow users to mix & match use of the 
-# default *.conf files included and *.conf files they add on their own. For example, a user could specify the following:
-# - nginx_confd_files:
-#   - ./files/conf.d/http_core.conf
-#   - ./path/to/my/files/my_http_module_file.conf
-# The default values would be:
-# - nginx_confd_files:
-#   - ./files/conf.d/http_core.conf
-#   - ./files/conf.d/http_gzip.conf
-#   - ./files/conf.d/http_log.conf
-#   - ./files/conf.d/http_proxy.conf
-#   - ./files/conf.d/http_ssl.conf
-
 nginx_confd_files: 
   - ./conf.d/http_core.conf
   - ./conf.d/http_gzip.conf

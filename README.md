@@ -79,11 +79,11 @@ Accept all new connections as they're opened.
 
 ```
 nginx_confd_files: 
-  - ./templates/conf.d/http_core.conf
-  - ./templates/conf.d/http_gzip.conf
-  - ./templates/conf.d/http_log.conf
-  - ./templates/conf.d/http_proxy.conf
-  - ./templates/conf.d/http_ssl.conf
+  - ./conf.d/http_core.conf
+  - ./conf.d/http_gzip.conf
+  - ./conf.d/http_log.conf
+  - ./conf.d/http_proxy.conf
+  - ./conf.d/http_ssl.conf
 ```
 
 A list of the paths to the \*.conf files on local machine that will be copied into nginx_confd_directory on server.
@@ -93,7 +93,7 @@ It is recommended to make a seperate .conf file for each module you want to conf
 
 ```
 nginx_sites_available_files: 
-  - ./templates/sites-available/default.conf
+  - ./sites-available/default.conf
 ```
 
 A list of the paths to the serverblock files on local machine that will be copied into nginx_sites_available_directory on server and symlinked to nginx_sites_enabled_directory. See [this guide](https://linode.com/docs/web-servers/nginx/how-to-configure-nginx/) for explanation and examples of configuring Nginx and setting up serverblock files.
