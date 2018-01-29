@@ -13,5 +13,9 @@
       - ./tests/files/sites-available/test.conf
     # nginx_remove_default_vhost: true
   
+  pre_tasks:
+    - name: Install dependencies.
+      package: name=curl state=present
+      
   roles:
     - role_under_test
