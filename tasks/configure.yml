@@ -18,6 +18,15 @@
   notify:
     - restart nginx
 
+- name: Ensure nginx_default_serverblock_path exists
+  file:
+    path: "{{ nginx_default_serverblock_path }}"
+    state: file
+  register: default_serverblock_path 
+  
+- debug:
+    msg: "default_serverblock_path: {{ default_serverblock_path }}"
+
 # - debug:
 #     msg: "basename: {{ item | basename }}"
 #   with_items: "{{ nginx_confd_files }}"
