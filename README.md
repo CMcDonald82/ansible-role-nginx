@@ -28,7 +28,7 @@ Specifies the location on the server to copy the nginx.conf file to.
 nginx_confd_directory: /etc/nginx/conf.d
 ```
 
-This is the path on the server to copy the conf files for the nginx.conf into. The nginx.conf file is setup to include all files ending in \*.conf that are located in the directory at nginx_confd_dir_path.
+This is the path on the server to copy the conf files for the nginx.conf into. The nginx.conf file is setup to include all files ending in \*.conf that are located in the directory at nginx_confd_directory.
 
 ```
 nginx_sites_available_directory: /etc/nginx/sites-available
