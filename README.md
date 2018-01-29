@@ -1,6 +1,8 @@
 # ansible-role-nginx
-Ansible role for installing and configuring NGINX on an Ubuntu server
 
+[![Build Status](https://travis-ci.org/CMcDonald82/ansible-role-nginx.svg?branch=master)](https://travis-ci.org/CMcDonald82/ansible-role-nginx)
+
+Ansible role for installing and configuring NGINX on an Ubuntu server
 
 ## Requirements
 
