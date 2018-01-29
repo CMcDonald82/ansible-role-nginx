@@ -99,3 +99,30 @@ nginx_sites_available_files:
 A list of the paths to the serverblock files on local machine that will be copied into nginx_sites_available_directory on server and symlinked to nginx_sites_enabled_directory. See [this guide](https://linode.com/docs/web-servers/nginx/how-to-configure-nginx/) for explanation and examples of configuring Nginx and setting up serverblock files.
 
 It is recommended to make a separate serverblock file for each server you want to configure (ex. example.com.conf for configuring the site located at example.com)
+
+
+## Example Playbook
+
+```
+- name: Setup Ubuntu server with Nginx
+  hosts: all
+  remote_user: "{{ remote_username }}"
+  become: yes
+
+  roles:
+    - role: nginx_role
+      nginx_worker_connections: 1024
+      nginx_confd_files: 
+        - /path/to/custom/file/http_core.conf
+        - ./conf.d/http_gzip.conf
+        - ./conf.d/http_log.conf
+        - ./conf.d/http_proxy.conf
+      nginx_sites_available_files: 
+        - ./sites-available/default.conf
+        - /path/to/mysite/example.com.conf
+```
+
+
+## Dependencies
+
+None
