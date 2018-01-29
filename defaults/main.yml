@@ -51,7 +51,7 @@ nginx_multi_accept: on
 
 
 #------------------------------------------------------------------------------
-# HTTP
+# HTTP & Serverblock
 #------------------------------------------------------------------------------
 # Path to the *.conf files on local machine which will be copied into nginx_confd_dir_path on server.
 # See the modules reference at https://nginx.org/en/docs/ for descriptions of all the ngx_http_*_module directives that are available for configuration.

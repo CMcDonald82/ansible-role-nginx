@@ -14,7 +14,7 @@
   file:
     path: "{{ nginx_default_serverblock_path }}"
     state: absent
-  when: nginx_installed.changed 
+  # when: nginx_installed.changed 
   notify:
     - restart nginx
 
