@@ -10,21 +10,14 @@
     - "{{ nginx_sites_enabled_directory }}"
   notify: reload nginx
 
-- name: Nginx | Remove default nginx config file (serverblock) 
-  file:
-    path: "{{ nginx_default_serverblock_path }}"
-    state: absent
-  # when: nginx_installed.changed 
-  notify:
-    - restart nginx
+# - name: Nginx | Remove default nginx config file (serverblock) 
+#   file:
+#     path: "{{ nginx_default_serverblock_path }}"
+#     state: absent
+#   when: nginx_installed.changed 
+#   notify:
+#     - restart nginx
 
-
-# - debug:
-#     msg: "basename: {{ item | basename }}"
-#   with_items: "{{ nginx_confd_files }}"
-
-# This is the new way which copies files over individually which should allow more flexibility for users to specify 
-# which particular files they want from a variety of locations on their local machine
 - name: Nginx | Copy .conf files into conf.d directory
   template:
     src: "{{ item }}"
@@ -47,35 +40,12 @@
     - validate nginx configuration
     - restart nginx
 
-# This is the old way, which synchronizes the entire directory.
-# - name: Copy conf.d directory
-#   synchronize:
-#     src: ./templates/conf.d/
-#     dest: "{{ nginx_confd_dir_path }}"
-#   notify: 
-#     - validate nginx configuration
-#     - restart nginx
-
-# - name: Copy sites-available directory
-#   synchronize:
-#     src: ./templates/sites-available/
-#     dest: "{{ nginx_sites_available_dir_path }}"
-#   notify:
-#     - validate nginx configuration
-#     - restart nginx
-
 - name: Nginx | Find all files in sites-available directory
   find:
     path: "{{ nginx_sites_available_directory }}"
     file_type: any
   register: sites_available_result
 
-# - debug:
-#     msg: "sites_available_result {{ sites_available_result.files }}"
-
-
-
-# NOTE: Symlink all files except default.conf
 - name: Nginx | Symlink files in sites-available directory to sites-enabled directory
   file:
     src: "{{ nginx_sites_available_directory }}/{{ item.path | basename }}"
