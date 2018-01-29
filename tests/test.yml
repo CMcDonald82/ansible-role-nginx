@@ -10,8 +10,8 @@
       - ./templates/conf.d/http_log.conf
       - ./templates/conf.d/http_proxy.conf
     nginx_sites_available_files:
-      - ./tests/files/sites-available/test.conf
-    nginx_remove_default_vhost: true
+      - ./sites-available/test.conf
+    # nginx_remove_default_vhost: true
   
   roles:
     - role_under_test
