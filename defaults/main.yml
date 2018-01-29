@@ -16,7 +16,7 @@ nginx_sites_enabled_directory: /etc/nginx/sites-enabled
 
 # This is the path to the default serverblock file that is created automatically when Nginx is installed
 nginx_default_serverblock_path: /etc/nginx/sites-enabled/default
-
+nginx_remove_default_vhost: false
 
 # dhparams
 nginx_dhparam_path: /etc/ssl/dhparams.pem
