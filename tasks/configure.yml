@@ -10,14 +10,6 @@
     - "{{ nginx_sites_enabled_directory }}"
   notify: reload nginx
 
-# - name: Nginx | Remove default nginx config file (serverblock) 
-#   file:
-#     path: "{{ nginx_default_serverblock_path }}"
-#     state: absent
-#   when: nginx_installed.changed 
-#   notify:
-#     - restart nginx
-
 - name: Nginx | Copy .conf files into conf.d directory
   template:
     src: "{{ item }}"
