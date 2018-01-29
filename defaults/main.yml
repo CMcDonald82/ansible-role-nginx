@@ -14,6 +14,8 @@ nginx_confd_directory_remote: /etc/nginx/conf.d # Do we need this or should we j
 nginx_sites_available_directory_remote: /etc/nginx/sites-available
 nginx_sites_enabled_directory: /etc/nginx/sites-enabled
 
+# This is the path to the default serverblock file that is created automatically when Nginx is installed
+nginx_default_serverblock_path: /etc/nginx/sites-enabled/default
 
 
 # dhparams
