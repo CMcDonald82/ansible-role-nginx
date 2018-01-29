@@ -5,8 +5,8 @@
     path: "{{ item }}"
     state: directory
   with_items:
-    - "{{ nginx_confd_directory_remote }}"
-    - "{{ nginx_sites_available_directory_remote }}"
+    - "{{ nginx_confd_directory }}"
+    - "{{ nginx_sites_available_directory }}"
     - "{{ nginx_sites_enabled_directory }}"
   notify: reload nginx
 
@@ -14,7 +14,7 @@
   file:
     path: "{{ nginx_default_serverblock_path }}"
     state: absent
-  when: nginx_installed.changed #nginx_remove_default_vhost
+  when: nginx_installed.changed 
   notify:
     - restart nginx
 
@@ -28,7 +28,7 @@
 - name: Nginx | Copy .conf files into conf.d directory
   template:
     src: "{{ item }}"
-    dest: "{{ nginx_confd_directory_remote }}/{{ item | basename }}"
+    dest: "{{ nginx_confd_directory }}/{{ item | basename }}"
     owner: "{{ nginx_user }}"
     mode: 0644
   with_items: "{{ nginx_confd_files }}"
@@ -39,7 +39,7 @@
 - name: Nginx | Copy serverblock files into sites-available directory
   template:
     src: "{{ item }}"
-    dest: "{{ nginx_sites_available_directory_remote }}/{{ item | basename }}"
+    dest: "{{ nginx_sites_available_directory }}/{{ item | basename }}"
     owner: "{{ nginx_user }}"
     mode: 0644
   with_items: "{{ nginx_sites_available_files }}"
@@ -66,7 +66,7 @@
 
 - name: Nginx | Find all files in sites-available directory
   find:
-    path: "{{ nginx_sites_available_directory_remote }}"
+    path: "{{ nginx_sites_available_directory }}"
     file_type: any
   register: sites_available_result
 
@@ -78,7 +78,7 @@
 # NOTE: Symlink all files except default.conf
 - name: Nginx | Symlink files in sites-available directory to sites-enabled directory
   file:
-    src: "{{ nginx_sites_available_directory_remote }}/{{ item.path | basename }}"
+    src: "{{ nginx_sites_available_directory }}/{{ item.path | basename }}"
     dest: "{{ nginx_sites_enabled_directory }}/{{ item.path | basename }}"
     state: link
     force: yes

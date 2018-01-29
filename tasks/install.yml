@@ -6,7 +6,6 @@
     state: present
     update_cache: yes
   register: nginx_ppa_added
-  # when: nginx_ppa_use
 
 - name: Ensure Nginx will reinstall if the PPA was just added
   apt:

@@ -5,18 +5,14 @@
 #------------------------------------------------------------------------------
 # INSTALLATION
 #------------------------------------------------------------------------------
-# nginx_ppa_version is only needed if installing via ppa
 nginx_ppa_version: stable 
 nginx_conf_file_path: /etc/nginx/nginx.conf
-# nginx_confd_directory_local: ./templates/conf.d # probably not needed anymore
-nginx_confd_directory_remote: /etc/nginx/conf.d # Do we need this or should we just hardcode it to be safer since if a user changes this path, they'd also need to modify the path in the include statement in nginx.conf
-# nginx_sites_available_directory_local: ./templates/sites-available # probably not needed anymore
-nginx_sites_available_directory_remote: /etc/nginx/sites-available
+nginx_confd_directory: /etc/nginx/conf.d # Do we need this or should we just hardcode it to be safer since if a user changes this path, they'd also need to modify the path in the include statement in nginx.conf
+nginx_sites_available_directory: /etc/nginx/sites-available
 nginx_sites_enabled_directory: /etc/nginx/sites-enabled
 
 # This is the path to the default serverblock file that is created automatically when Nginx is installed
 nginx_default_serverblock_path: /etc/nginx/sites-enabled/default
-# nginx_remove_default_vhost: false
 
 # dhparams
 nginx_dhparam_path: /etc/ssl/dhparams.pem
@@ -34,13 +30,12 @@ nginx_dhparam_encryption_size: 2048
 nginx_user: "www-data"
 
 # Set to number of CPU cores, auto will try to autodetect.
-nginx_worker_processes: auto #1
+nginx_worker_processes: auto 
 
 # File that stores the process ID. Rarely needs changing.
-nginx_pidfile: "/run/nginx.pid" #"/var/run/nginx.pid"
+nginx_pidfile: "/run/nginx.pid" 
 
 # This is the path to where the log files will be stored. 
-# NOTE: See if this variable works when embedded in files within the 'files' directory UPDATE: It does work when copying via the template module
 nginx_log_path: "/var/log/nginx"
 
 
@@ -61,7 +56,7 @@ nginx_multi_accept: on
 # Path to the *.conf files on local machine which will be copied into nginx_confd_dir_path on server.
 # See the modules reference at https://nginx.org/en/docs/ for descriptions of all the ngx_http_*_module directives that are available for configuration.
 # Recommended to make a seperate .conf file for each module you want to configre (ex. http_core.conf for configuring the directives in ngx_http_core_module)
-# NOTE: This may be able to replace all the vars below since we can just have users create files to define these variables within the nginx_confd_dir_local directory
+
 # Also, consider having users specify a list of individual *.conf files here. This would allow users to mix & match use of the 
 # default *.conf files included and *.conf files they add on their own. For example, a user could specify the following:
 # - nginx_confd_files:
@@ -75,8 +70,7 @@ nginx_multi_accept: on
 #   - ./files/conf.d/http_proxy.conf
 #   - ./files/conf.d/http_ssl.conf
 
-# nginx_confd_dir_local: ./files/conf.d # use this if we're synchronizing the local dir with the remote
-nginx_confd_files: # Use this if specifying specific files to copy over to the remote server
+nginx_confd_files: 
   - ./templates/conf.d/http_core.conf
   - ./templates/conf.d/http_gzip.conf
   - ./templates/conf.d/http_log.conf
@@ -86,55 +80,4 @@ nginx_confd_files: # Use this if specifying specific files to copy over to the r
 nginx_sites_available_files: 
   - ./templates/sites-available/default.conf
 
-
-# NOW LOCATED IN /files/conf.d/http_core.conf
-# Speed up file transfer by using sendfile().
-# nginx_sendfile: 'on'
-
-# NOW LOCATED IN /files/conf.d/http_core.conf
-# Don't send partial frames, which increases throughput.
-# nginx_tcp_nopush: 'on'
-
-# NOW LOCATED IN /files/conf.d/http_core.conf
-# Don't wait to send data in keep-alive state.
-# nginx_tcp_nodelay: 'on'
-
-# NOW LOCATED IN /files/conf.d/http_core.conf
-# How long each connection should stay open for.
-# nginx_keepalive_timeout: 65
-
-# NOW LOCATED IN /files/conf.d/http_core.conf
-# Timeout for reading client request body.
-# nginx_client_body_timeout: 30
-
-# NOW LOCATED IN /files/conf.d/http_core.conf
-# Timeout for reading client request header.
-# nginx_client_header_timeout: 30
-
-# NOW LOCATED IN /files/conf.d/http_core.conf
-# Timeout for transmitting reponse to client.
-# nginx_send_timeout: 30
-
-# NOW LOCATED IN /files/conf.d/http_core.conf
-# Set the maximum allowed size of client request body. This should be set
-# to the value of files sizes you wish to upload 
-# nginx_client_max_body_size: "64m"
-
-# NOW LOCATED IN /files/conf.d/http_core.conf
-# nginx_client_body_buffer_size: "128k"
-
-# NOW LOCATED IN /files/conf.d/http_core.conf
-# nginx_types_hash_max_size: 2048
-
-# NOW LOCATED IN /files/conf.d/http_core.conf
-# Hide Nginx version in error messages and reponse headers.
-# nginx_server_tokens: 'off'
-
-# NOT NEEDED ANYMORE - we'll just hardcode this in unless people have a use for specifying a different path
-# nginx_mime_type_file_path: /etc/nginx/mime.types
-
-# NOW LOCATED IN /files/conf.d/http_core.conf
-# nginx_server_names_hash_bucket_size: 64
-# NOW LOCATED IN /files/conf.d/http_core.conf
-# nginx_server_name_in_redirect: 'off'
 
