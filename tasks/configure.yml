@@ -14,7 +14,7 @@
   file:
     path: "{{ nginx_default_serverblock_path }}"
     state: absent
-  when: "{{ nginx_remove_default_vhost }}"
+  when: nginx_remove_default_vhost
   notify:
     - restart nginx
 
