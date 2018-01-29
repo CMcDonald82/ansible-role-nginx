@@ -5,12 +5,12 @@
   become: yes
   vars:
     nginx_confd_files: 
-      - ./templates/conf.d/http_core.conf
+      - ./conf.d/http_core.conf
       - ./templates/conf.d/http_gzip.conf
       - ./templates/conf.d/http_log.conf
       - ./templates/conf.d/http_proxy.conf
     nginx_sites_available_files:
-      - ./sites-available/test.conf
+      - ./tests/files/sites-available/test.conf
     # nginx_remove_default_vhost: true
   
   roles:
