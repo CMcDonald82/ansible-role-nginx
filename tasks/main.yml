@@ -6,7 +6,7 @@
 
 - include_tasks: dhparams.yml
 
-- name: Ensure nginx is started and enabled to start at boot.
+- name: Nginx | Ensure nginx is started and enabled to start at boot.
   service: 
     name: nginx 
     state: started 
