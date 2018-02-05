@@ -10,7 +10,7 @@
       - ./conf.d/http_log.conf
       - ./conf.d/http_proxy.conf
     nginx_sites_available_files:
-      - ./tests/files/sites-available/test.conf
+      - ./tests/files/sites-available/test
   
   pre_tasks:
     - name: Update apt cache.
