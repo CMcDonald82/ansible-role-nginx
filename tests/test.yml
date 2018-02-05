@@ -1,8 +1,8 @@
 ---
 
 - hosts: all #localhost 
-  remote_user: root
-  become: yes
+  # remote_user: root
+  # become: yes
   vars:
     nginx_confd_files: 
       - ./conf.d/http_core.conf
