@@ -34,5 +34,13 @@
     - debug:
         msg: "sites-enabled: {{ command_result }}"
 
+    - name: Read the serverblock file
+      shell: cat /etc/nginx.sites-enabled/test
+      changed_when: false
+      register: test_serverblock
+
+    - debug:
+        msg: "Test serverblock: {{ test_serverblock }}"
+
   roles:
     - role_under_test
