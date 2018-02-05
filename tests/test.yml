@@ -16,7 +16,7 @@
     - name: Update apt cache.
       apt: 
         update_cache: yes 
-        cache_valid_time: 1600
+        cache_valid_time: 600
       when: ansible_os_family == 'Debian'
       changed_when: false
 
@@ -27,12 +27,12 @@
   
   tasks:
     - name: List contents of sites-available
-      shell: ls /etc/nginx/sites-available 
+      shell: ls /etc/nginx/sites-enabled
       changed_when: false
       register: command_result
 
     - debug:
-        msg: "sites_available: {{ command_result }}"
+        msg: "sites-enabled: {{ command_result }}"
 
   roles:
     - role_under_test
