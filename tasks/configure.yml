@@ -63,4 +63,4 @@
     group: root
     mode: 0644
     validate: nginx -t -c %s 
-  notify: restart nginx
+  notify: reload nginx
