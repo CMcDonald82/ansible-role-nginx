@@ -24,6 +24,15 @@
       package: 
         name: curl 
         state: present
+  
+  tasks:
+    - name: List contents of sites-available
+      shell: ls /etc/nginx/sites-available 
+      changed_when: false
+      register: command_result
+
+    - debug:
+        msg: "sites_available: {{ command_result }}"
 
   roles:
     - role_under_test
