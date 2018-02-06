@@ -15,7 +15,7 @@
   pre_tasks:
     - name: Update apt cache.
       apt: 
-        name: curl=7.47.0-1ubuntu2.5
+        name: curl=7.47.0-1ubuntu2.6
         state: present
         update_cache: yes 
         cache_valid_time: 600
