@@ -22,7 +22,7 @@
 
     - name: Install dependencies.
       package: 
-        name: curl=7.47.0-1ubuntu2.5
+        name: curl=7.47.0
         state: present
   
   # tasks:
