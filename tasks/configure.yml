@@ -38,7 +38,7 @@
   with_items: "{{ nginx_sites_available_files }}"
   notify:
     - validate nginx configuration
-    - restart nginx
+    - reload nginx
 
 - name: Nginx | Find all files in sites-available directory
   find:
