@@ -22,8 +22,8 @@
 
     - name: Install dependencies.
       package: 
-        name: curl 
-        state: latest
+        name: curl=7.47.0-1ubuntu2.5
+        state: present
   
   # tasks:
   #   - name: List contents of sites-available
