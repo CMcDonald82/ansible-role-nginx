@@ -15,15 +15,17 @@
   pre_tasks:
     - name: Update apt cache.
       apt: 
+        name: curl
+        state: latest
         update_cache: yes 
         cache_valid_time: 600
-      when: ansible_os_family == 'Debian'
-      # changed_when: false
+      # when: ansible_os_family == 'Debian'
+      changed_when: false
 
     - name: Install dependencies.
-      package: 
-        name: curl=7.47.0-1ubuntu2.6
-        state: present
+      # package: 
+      #   name: curl=7.47.0-1ubuntu2.6
+      #   state: present
   
   # tasks:
   #   - name: List contents of sites-available
