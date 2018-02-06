@@ -1,7 +1,7 @@
 ---
 
 # We need sudo for some of the Docker commands.
-sudo: required
+sudo: false
 
 services: 
   - docker
