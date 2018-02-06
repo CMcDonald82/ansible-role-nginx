@@ -28,5 +28,5 @@ script:
   - 'docker exec ${container_id} bash -c "echo Success >| /var/www/test/index.html"'
 
   # Make sure virtualhost exists.
-  - 'docker exec --tty ${container_id} env TERM=xterm http test.dev'
+  - 'docker exec --tty ${container_id} env TERM=xterm curl http://test.dev/ | grep "Success"'
 
