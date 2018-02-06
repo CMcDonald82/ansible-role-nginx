@@ -22,7 +22,7 @@
 
     - name: Install dependencies.
       package: 
-        name: curl
+        name: httpie #curl
         state: present
   
   # tasks:
