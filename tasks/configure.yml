@@ -10,13 +10,13 @@
     - "{{ nginx_sites_enabled_directory }}"
   notify: reload nginx
 
-- name: Nginx | Remove default nginx serverblock 
-  file:
-    path: /etc/nginx/sites-enabled/default
-    state: absent
-  when: nginx_installed.changed 
-  notify:
-    - restart nginx
+# - name: Nginx | Remove default nginx serverblock 
+#   file:
+#     path: /etc/nginx/sites-enabled/default
+#     state: absent
+#   when: nginx_installed.changed 
+#   notify:
+#     - restart nginx
 
 - name: Nginx | Copy .conf files into conf.d directory
   template:
@@ -53,7 +53,7 @@
     state: link
     force: yes
   with_items: "{{ sites_available_result.files }}"
-  when: item.path | basename != 'default'
+  when: item.path | basename != 'default.conf'
 
 - name: Nginx | Copy nginx.conf in place
   template:
@@ -63,4 +63,4 @@
     group: root
     mode: 0644
     validate: nginx -t -c %s 
-  notify: restart nginx
+  notify: reload nginx

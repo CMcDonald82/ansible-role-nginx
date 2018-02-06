@@ -23,40 +23,40 @@
     - name: Install dependencies.
       package: 
         name: curl 
-        state: installed #present
+        state: present
   
-  tasks:
-    - name: List contents of sites-available
-      shell: ls /etc/nginx/sites-enabled
-      changed_when: false
-      register: command_result
+  # tasks:
+  #   - name: List contents of sites-available
+  #     shell: ls /etc/nginx/sites-enabled
+  #     changed_when: false
+  #     register: command_result
 
-    - debug:
-        msg: "sites-enabled: {{ command_result }}"
+  #   - debug:
+  #       msg: "sites-enabled: {{ command_result }}"
 
-    - name: Read the serverblock file
-      shell: cat /etc/nginx/sites-enabled/test.conf
-      changed_when: false
-      register: test_serverblock
+  #   - name: Read the serverblock file
+  #     shell: cat /etc/nginx/sites-enabled/test.conf
+  #     changed_when: false
+  #     register: test_serverblock
 
-    - debug:
-        msg: "Test serverblock: {{ test_serverblock }}"
+  #   - debug:
+  #       msg: "Test serverblock: {{ test_serverblock }}"
 
-    - name: Read the nginx.conf file
-      shell: cat /etc/nginx/nginx.conf
-      changed_when: false
-      register: test_nginxconf
+  #   - name: Read the nginx.conf file
+  #     shell: cat /etc/nginx/nginx.conf
+  #     changed_when: false
+  #     register: test_nginxconf
 
-    - debug:
-        msg: "Test nginx.conf: {{ test_nginxconf }}"
+  #   - debug:
+  #       msg: "Test nginx.conf: {{ test_nginxconf }}"
 
-    - name: Read the http_core.conf file
-      shell: cat /etc/nginx/conf.d/http_core.conf
-      changed_when: false
-      register: test_http_core
+  #   - name: Read the http_core.conf file
+  #     shell: cat /etc/nginx/conf.d/http_core.conf
+  #     changed_when: false
+  #     register: test_http_core
 
-    - debug:
-        msg: "Test http_core.conf: {{ test_http_core }}"
+  #   - debug:
+  #       msg: "Test http_core.conf: {{ test_http_core }}"
 
   roles:
     - role_under_test

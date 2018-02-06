@@ -1,10 +1,10 @@
 ---
 
-- include_tasks: dhparams.yml
-
 - include_tasks: install.yml
 
 - include_tasks: configure.yml
+
+- include_tasks: dhparams.yml
 
 - name: Nginx | Ensure nginx is started and enabled to start at boot.
   service: 
