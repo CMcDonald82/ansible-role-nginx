@@ -23,7 +23,7 @@
     - name: Install dependencies.
       package: 
         name: curl 
-        state: present
+        state: installed #present
   
   tasks:
     - name: List contents of sites-available
