@@ -18,7 +18,7 @@
         update_cache: yes 
         cache_valid_time: 600
       when: ansible_os_family == 'Debian'
-      changed_when: false
+      # changed_when: false
 
     - name: Install dependencies.
       package: 
