@@ -10,7 +10,7 @@
       - ./conf.d/http_log.conf
       - ./conf.d/http_proxy.conf
     nginx_sites_available_files:
-      - ./tests/files/sites-available/test.j2
+      - ./tests/files/sites-available/test.conf
   
   pre_tasks:
     - name: Update apt cache.
@@ -37,7 +37,7 @@
   #       msg: "sites-enabled: {{ command_result }}"
 
     - name: Read the serverblock file
-      shell: cat /etc/nginx/sites-enabled/test.j2
+      shell: cat /etc/nginx/sites-enabled/test.conf
       changed_when: false
       register: test_serverblock
 
