@@ -37,7 +37,7 @@
   #       msg: "sites-enabled: {{ command_result }}"
 
     - name: Read the serverblock file
-      shell: cat /etc/nginx/sites-enabled/test.conf
+      shell: cat /etc/nginx/sites-enabled/test.j2
       changed_when: false
       register: test_serverblock
 
