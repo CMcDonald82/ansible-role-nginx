@@ -50,5 +50,13 @@
     - debug:
         msg: "Test nginx.conf: {{ test_nginxconf }}"
 
+    - name: Read the http_core.conf file
+      shell: cat /etc/nginx/conf.d/http_core.conf
+      changed_when: false
+      register: test_http_core
+
+    - debug:
+        msg: "Test http_core.conf: {{ test_http_core }}"
+
   roles:
     - role_under_test
