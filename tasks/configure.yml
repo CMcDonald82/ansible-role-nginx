@@ -17,7 +17,7 @@
   when: nginx_installed.changed 
   notify:
     - reload nginx
-    # - restart nginx
+    # - restart nginx # Should probably use reload instead
 
 - name: Nginx | Copy .conf files into conf.d directory
   template:
