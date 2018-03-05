@@ -24,8 +24,8 @@ script:
   - ${PWD}/tests/test.sh
 
   # Setup test site.
-  - 'docker exec ${container_id} mkdir -p /var/www/test.dev'
-  - 'docker exec ${container_id} bash -c "echo Success >| /var/www/test.dev/index.html"'
+  - 'docker exec ${container_id} mkdir -p /var/www/test'
+  - 'docker exec ${container_id} bash -c "echo Success >| /var/www/test/index.html"'
 
   # Make sure virtualhost exists. 
   # NOTE: This is not currenty working - not sure if it has something to do with Travis, Docker, Nginx or some combination thereof. Disabling for now until we figure out what's going on
