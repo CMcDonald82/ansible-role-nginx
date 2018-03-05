@@ -10,13 +10,14 @@
     - "{{ nginx_sites_enabled_directory }}"
   notify: reload nginx
 
-# - name: Nginx | Remove default nginx serverblock 
-#   file:
-#     path: /etc/nginx/sites-enabled/default
-#     state: absent
-#   when: nginx_installed.changed 
-#   notify:
-#     - restart nginx
+- name: Nginx | Remove default nginx serverblock 
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  when: nginx_installed.changed 
+  notify:
+    - reload nginx
+    # - restart nginx
 
 - name: Nginx | Copy .conf files into conf.d directory
   template:
