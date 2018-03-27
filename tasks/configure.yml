@@ -5,7 +5,7 @@
     path: "{{ item }}"
     state: directory
   with_items:
-    - "{{ nginx_confd_directory }}"
+    - "{{ nginx_confd_path }}"
     - "{{ nginx_sites_available_directory }}"
     - "{{ nginx_sites_enabled_directory }}"
   notify: reload nginx
@@ -13,7 +13,7 @@
 - name: Nginx | Copy .conf files into conf.d directory
   template:
     src: "{{ item }}"
-    dest: "{{ nginx_confd_directory }}/{{ item | basename }}"
+    dest: "{{ nginx_confd_path }}/{{ item | basename }}"
     owner: "{{ nginx_user }}"
     mode: 0644
   with_items: "{{ nginx_confd_files }}"

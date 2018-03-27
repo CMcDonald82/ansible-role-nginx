@@ -25,10 +25,10 @@ nginx_conf_file_path: /etc/nginx/nginx.conf
 Specifies the location on the server to copy the nginx.conf file to.
 
 ```
-nginx_confd_directory: /etc/nginx/conf.d
+nginx_confd_path: /etc/nginx/conf.d
 ```
 
-This is the path on the server to copy the conf files for the nginx.conf into. The nginx.conf file is setup to include all files ending in \*.conf that are located in the directory at nginx_confd_directory.
+This is the path on the server to copy the conf files for the nginx.conf into. The nginx.conf file is setup to include all files ending in \*.conf that are located in the directory at nginx_confd_path.
 
 ```
 nginx_sites_available_directory: /etc/nginx/sites-available
@@ -88,7 +88,7 @@ nginx_confd_files:
   - ./conf.d/http_ssl.conf
 ```
 
-A list of the paths to the \*.conf files on local machine that will be copied into nginx_confd_directory on server.
+A list of the paths to the \*.conf files on local machine that will be copied to nginx_confd_path on server.
 See the [modules reference](https://nginx.org/en/docs/) for descriptions of all the ngx_http_*_module directives that are available for configuration.
 
 It is recommended to make a seperate .conf file for each module you want to configure (ex. http_core.conf for configuring the directives in ngx_http_core_module)
