@@ -102,6 +102,13 @@ A list of the paths to the serverblock files on local machine that will be copie
 
 It is recommended to make a separate serverblock file for each server you want to configure (ex. example.com.conf for configuring the site located at example.com)
 
+```
+nginx_serverblock_files_removed: 
+  - default
+```
+A list of the names of serverblock files that will be removed from the /sites-enabled directory.
+
+
 
 ## Example Playbook
 
