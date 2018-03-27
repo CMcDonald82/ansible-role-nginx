@@ -7,7 +7,7 @@
   with_items:
     - "{{ nginx_confd_path }}"
     - "{{ nginx_sites_available_path }}"
-    - "{{ nginx_sites_enabled_directory }}"
+    - "{{ nginx_sites_enabled_path }}"
   notify: reload nginx
 
 - name: Nginx | Copy .conf files into conf.d directory
@@ -41,7 +41,7 @@
 - name: Nginx | Symlink files in sites-available directory to sites-enabled directory
   file:
     src: "{{ nginx_sites_available_path }}/{{ item.path | basename }}"
-    dest: "{{ nginx_sites_enabled_directory }}/{{ item.path | basename }}"
+    dest: "{{ nginx_sites_enabled_path }}/{{ item.path | basename }}"
     state: link
     force: yes
   with_items: "{{ sites_available_result.files }}"
@@ -49,7 +49,7 @@
 
 - name: Nginx | Remove serverblock files
   file:
-    path: "{{ nginx_sites_enabled_directory }}/{{ item }}"
+    path: "{{ nginx_sites_enabled_path }}/{{ item }}"
     state: absent
   with_items: "{{ nginx_serverblock_files_removed }}"
   notify:

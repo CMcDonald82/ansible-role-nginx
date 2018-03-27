@@ -34,10 +34,10 @@ This is the path on the server to copy the conf files for the nginx.conf into. T
 nginx_sites_available_path: /etc/nginx/sites-available
 ```
 
-The path on the server to copy the serverblock files into. These files will then be symlinked to the directory at nginx_sites_enabled_directory.
+The path on the server to copy the serverblock files into. These files will then be symlinked to the directory at nginx_sites_enabled_path.
 
 ```
-nginx_sites_enabled_directory: /etc/nginx/sites-enabled
+nginx_sites_enabled_path: /etc/nginx/sites-enabled
 ```
 
 The path on the server that the serverblock files will be symlinked to and served from.
@@ -98,7 +98,7 @@ nginx_serverblock_files:
   - ./sites-available/default.conf
 ```
 
-A list of the paths to the serverblock files on local machine that will be copied into nginx_sites_available_path on server and symlinked to nginx_sites_enabled_directory. See [this guide](https://linode.com/docs/web-servers/nginx/how-to-configure-nginx/) for explanation and examples of configuring Nginx and setting up serverblock files.
+A list of the paths to the serverblock files on local machine that will be copied into nginx_sites_available_path on server and symlinked to nginx_sites_enabled_path. See [this guide](https://linode.com/docs/web-servers/nginx/how-to-configure-nginx/) for explanation and examples of configuring Nginx and setting up serverblock files.
 
 It is recommended to make a separate serverblock file for each server you want to configure (ex. example.com.conf for configuring the site located at example.com)
 
