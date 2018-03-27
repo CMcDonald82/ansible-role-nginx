@@ -6,7 +6,7 @@
     state: directory
   with_items:
     - "{{ nginx_confd_path }}"
-    - "{{ nginx_sites_available_directory }}"
+    - "{{ nginx_sites_available_path }}"
     - "{{ nginx_sites_enabled_directory }}"
   notify: reload nginx
 
@@ -24,7 +24,7 @@
 - name: Nginx | Copy serverblock files into sites-available directory
   template:
     src: "{{ item }}"
-    dest: "{{ nginx_sites_available_directory }}/{{ item | basename }}"
+    dest: "{{ nginx_sites_available_path }}/{{ item | basename }}"
     owner: "{{ nginx_user }}"
     mode: 0644
   with_items: "{{ nginx_serverblock_files }}"
@@ -34,13 +34,13 @@
 
 - name: Nginx | Find all files in sites-available directory
   find:
-    path: "{{ nginx_sites_available_directory }}"
+    path: "{{ nginx_sites_available_path }}"
     file_type: any
   register: sites_available_result
 
 - name: Nginx | Symlink files in sites-available directory to sites-enabled directory
   file:
-    src: "{{ nginx_sites_available_directory }}/{{ item.path | basename }}"
+    src: "{{ nginx_sites_available_path }}/{{ item.path | basename }}"
     dest: "{{ nginx_sites_enabled_directory }}/{{ item.path | basename }}"
     state: link
     force: yes

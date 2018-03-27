@@ -8,7 +8,7 @@
 nginx_ppa_version: stable 
 nginx_conf_file_path: /etc/nginx/nginx.conf
 nginx_confd_path: /etc/nginx/conf.d 
-nginx_sites_available_directory: /etc/nginx/sites-available
+nginx_sites_available_path: /etc/nginx/sites-available
 nginx_sites_enabled_directory: /etc/nginx/sites-enabled
 
 
