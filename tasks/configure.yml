@@ -14,7 +14,7 @@
   file:
     path: /etc/nginx/sites-enabled/default
     state: absent
-  when: nginx_installed.changed 
+  # when: nginx_installed.changed 
   notify:
     - reload nginx
     # - restart nginx # Should probably use reload instead
