@@ -11,6 +11,7 @@
       - ./conf.d/http_proxy.conf
     nginx_sites_available_files:
       - ./tests/files/sites-available/test.conf
+    nginx_serverblock_files_removed: []
   
   pre_tasks:
     - name: Update apt cache.
