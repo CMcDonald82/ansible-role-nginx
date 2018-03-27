@@ -47,14 +47,13 @@
   with_items: "{{ sites_available_result.files }}"
   when: item.path | basename != 'default.conf'
 
-- name: Nginx | Remove default nginx serverblock 
+- name: Nginx | Remove serverblock files
   file:
-    path: /etc/nginx/sites-enabled/default
+    path: "{{ nginx_sites_enabled_directory }}/{{ item }}"
     state: absent
-  # when: nginx_installed.changed 
+  with_items: "{{ nginx_serverblock_files_removed }}"
   notify:
     - reload nginx
-    # - restart nginx # Should probably use reload instead
 
 - name: Nginx | Copy nginx.conf in place
   template:
