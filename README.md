@@ -94,7 +94,7 @@ See the [modules reference](https://nginx.org/en/docs/) for descriptions of all 
 It is recommended to make a seperate .conf file for each module you want to configure (ex. http_core.conf for configuring the directives in ngx_http_core_module)
 
 ```
-nginx_sites_available_files: 
+nginx_serverblock_files: 
   - ./sites-available/default.conf
 ```
 
@@ -126,7 +126,7 @@ A list of the names of serverblock files that will be removed from the /sites-en
         - ./conf.d/http_gzip.conf
         - ./conf.d/http_log.conf
         - ./conf.d/http_proxy.conf
-      nginx_sites_available_files: 
+      nginx_serverblock_files: 
         - ./sites-available/default.conf
         - /path/to/mysite/example.com.conf
 ```

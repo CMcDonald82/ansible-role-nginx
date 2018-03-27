@@ -27,7 +27,7 @@
     dest: "{{ nginx_sites_available_directory }}/{{ item | basename }}"
     owner: "{{ nginx_user }}"
     mode: 0644
-  with_items: "{{ nginx_sites_available_files }}"
+  with_items: "{{ nginx_serverblock_files }}"
   notify:
     - validate nginx configuration
     - reload nginx

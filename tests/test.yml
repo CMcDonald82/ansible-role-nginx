@@ -9,7 +9,7 @@
       - ./conf.d/http_gzip.conf
       - ./conf.d/http_log.conf
       - ./conf.d/http_proxy.conf
-    nginx_sites_available_files:
+    nginx_serverblock_files:
       - ./tests/files/sites-available/test.conf
     nginx_serverblock_files_removed: []
   

@@ -38,7 +38,7 @@ nginx_confd_files:
   - ./conf.d/http_proxy.conf
   - ./conf.d/http_ssl.conf
 
-nginx_sites_available_files: 
+nginx_serverblock_files: 
   - ./sites-available/default.conf
 
 nginx_serverblock_files_removed:
