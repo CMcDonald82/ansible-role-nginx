@@ -106,7 +106,7 @@ It is recommended to make a separate serverblock file for each server you want t
 nginx_serverblock_files_removed: 
   - default
 ```
-A list of the names of serverblock files that will be removed from the /sites-enabled directory.
+A list of the names of serverblock files that will be removed from the /sites-enabled directory. Each item in this list should just be the name of the file, since no path is needed (the paths to the sites-available and sites-enabled directories are already known).
 
 
 
