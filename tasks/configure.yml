@@ -47,7 +47,7 @@
   with_items: "{{ sites_available_result.files }}"
   when: item.path | basename != 'default.conf'
 
-- name: Nginx | Remove serverblock files
+- name: Nginx | Remove serverblock files from sites-enabled
   file:
     path: "{{ nginx_sites_enabled_path }}/{{ item }}"
     state: absent
@@ -55,6 +55,14 @@
   notify:
     - reload nginx
 
+- name: Nginx | Remove serverblock files from sites-available
+  file:
+    path: "{{ nginx_sites_available_path }}/{{ item }}"
+    state: absent
+  with_items: "{{ nginx_serverblock_files_removed }}"
+  notify:
+    - reload nginx
+    
 - name: Nginx | Copy nginx.conf in place
   template:
     src: nginx.conf
