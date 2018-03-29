@@ -41,7 +41,6 @@ nginx_confd_files:
 nginx_serverblock_files: 
   - ./sites-available/default.conf
 
-nginx_serverblock_files_removed:
-  - default
+nginx_serverblock_files_removed: []
 
 
