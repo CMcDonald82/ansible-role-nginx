@@ -4,7 +4,9 @@
 
 - include_tasks: install.yml
 
-- include_tasks: configure.yml
+- import_tasks: configure.yml
+  tags: 
+    - nginx_configuration
 
 - name: Nginx | Ensure nginx is started and enabled to start at boot.
   service: 
