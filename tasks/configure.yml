@@ -61,8 +61,8 @@
     state: absent
   with_items: "{{ nginx_serverblock_files_removed }}"
   notify:
-    - reload nginx
-    
+    - restart nginx
+
 - name: Nginx | Copy nginx.conf in place
   template:
     src: nginx.conf
