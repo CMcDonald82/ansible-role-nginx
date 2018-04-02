@@ -9,6 +9,8 @@
     - "{{ nginx_sites_available_path }}"
     - "{{ nginx_sites_enabled_path }}"
   notify: reload nginx
+  tags: 
+    - nginx_configuration
 
 - name: Nginx | Copy .conf files into conf.d directory
   template:
@@ -20,6 +22,8 @@
   notify:
     - validate nginx configuration
     - reload nginx
+  tags: 
+    - nginx_configuration
 
 - name: Nginx | Copy serverblock files into sites-available directory
   template:
@@ -31,12 +35,16 @@
   notify:
     - validate nginx configuration
     - reload nginx
+  tags: 
+    - nginx_configuration
 
 - name: Nginx | Find all files in sites-available directory
   find:
     path: "{{ nginx_sites_available_path }}"
     file_type: any
   register: sites_available_result
+  tags: 
+    - nginx_configuration
 
 - name: Nginx | Symlink files in sites-available directory to sites-enabled directory
   file:
@@ -46,6 +54,8 @@
     force: yes
   with_items: "{{ sites_available_result.files }}"
   when: item.path | basename != 'default.conf'
+  tags: 
+    - nginx_configuration
 
 - name: Nginx | Remove serverblock files from sites-enabled
   file:
@@ -54,6 +64,8 @@
   with_items: "{{ nginx_serverblock_files_removed }}"
   notify:
     - reload nginx
+  tags: 
+    - nginx_configuration
 
 - name: Nginx | Remove serverblock files from sites-available
   file:
@@ -62,7 +74,9 @@
   with_items: "{{ nginx_serverblock_files_removed }}"
   notify:
     - reload nginx
-    
+  tags: 
+    - nginx_configuration
+
 - name: Nginx | Copy nginx.conf in place
   template:
     src: nginx.conf
@@ -72,3 +86,5 @@
     mode: 0644
     validate: nginx -t -c %s 
   notify: reload nginx
+  tags: 
+    - nginx_configuration
