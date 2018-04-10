@@ -1,8 +1,7 @@
 ---
 
 - hosts: all
-  # remote_user: root
-  # become: yes
+  
   vars:
     nginx_confd_files: 
       - ./conf.d/http_core.conf
@@ -11,7 +10,8 @@
       - ./conf.d/http_proxy.conf
     nginx_serverblock_files:
       - ./tests/files/sites-available/test.conf
-    nginx_serverblock_files_removed: []
+    nginx_serverblock_files_removed: 
+      - default
   
   pre_tasks:
     - name: Update apt cache.
