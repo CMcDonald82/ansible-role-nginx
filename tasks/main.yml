@@ -8,12 +8,12 @@
 - import_tasks: install.yml
   tags:
     - nginx
-    - nginx_installation
+    - nginx_install
 
 - import_tasks: configure.yml
   tags: 
     - nginx
-    - nginx_configuration
+    - nginx_configure
 
 - name: Nginx | Ensure nginx is started and enabled to start at boot.
   service: 
