@@ -1,11 +1,18 @@
 ---
 
-- include_tasks: dhparams.yml
+- import_tasks: dhparams.yml
+  tags:
+    - nginx
+    - nginx_dhparams
 
-- include_tasks: install.yml
+- import_tasks: install.yml
+  tags:
+    - nginx
+    - nginx_installation
 
 - import_tasks: configure.yml
   tags: 
+    - nginx
     - nginx_configuration
 
 - name: Nginx | Ensure nginx is started and enabled to start at boot.
